@@ -15,6 +15,7 @@ app.set('views', 'views');
 // require bespoke routes
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const errorContoller = require('./controllers/error');
 
 // middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -23,9 +24,7 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // Catch-all middleware to handle 404s
-app.use((req, res, next) => {
-    res.render('404', {pageTitle: 'Page not found!'});
-})
+app.use(errorContoller.get404);
 
 // Create an instance of our app
 app.listen(3000);
